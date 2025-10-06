@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* Core utilities */
+.card { @apply rounded-2xl border bg-white p-5 shadow-card dark:bg-neutral-900 dark:border-neutral-800; }
+.card-muted { @apply rounded-2xl border bg-neutral-50 p-5 dark:bg-neutral-900/60 dark:border-neutral-800; }
+.btn { @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 disabled:opacity-60 disabled:cursor-not-allowed; }
+.btn-primary { @apply btn bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200; }
+.btn-ghost { @apply btn hover:bg-neutral-100 dark:hover:bg-neutral-800; }
+.badge { @apply rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300; }
+
+.prose { @apply dark:prose-invert; }
+.prose :where(a){ @apply no-underline; }
+
+/* Fancy gradient */
+.gradient-ring {
+  background: radial-gradient(circle at 20% -10%, rgba(99,102,241,.35), transparent 40%),
+              radial-gradient(circle at 80% 10%, rgba(16,185,129,.25), transparent 40%);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 999px; }
+.dark ::-webkit-scrollbar-thumb { background: #4b5563; }
+
+/* Tiptap prose tweaks (already uses .prose via editorProps) */
+.ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left; color: #9ca3af; pointer-events: none; height: 0;
+}
+

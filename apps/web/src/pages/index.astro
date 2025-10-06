@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/BaseLayout.astro';
+---
+<Layout title="CMS">
+  <section class="relative overflow-hidden rounded-2xl border p-10 gradient-ring dark:border-neutral-800">
+    <div class="absolute inset-0 bg-grid bg-[length:20px_20px] opacity-40 dark:hidden"></div>
+    <div class="absolute inset-0 bg-grid-dark bg-[length:20px_20px] opacity-20 hidden dark:block"></div>
+    <div class="relative grid md:grid-cols-2 gap-8 items-center">
+      <div class="space-y-5 animate-fade-in">
+        <h1 class="text-4xl font-bold leading-tight tracking-tight">
+          Ship content experiences that feel <span class="bg-yellow-200 px-2 rounded dark:text-neutral-900">premium</span>
+        </h1>
+        <p class="text-neutral-700 dark:text-neutral-300">
+          Astro SSR + React islands. Clean design system. Production build tooling. You focus on content — we handle the rest.
+        </p>
+        <div class="flex gap-3">
+          <a href="/blog" class="btn-primary">Browse Blog</a>
+          <a href="/dashboard" class="btn-ghost">Open Dashboard</a>
+        </div>
+        <div class="flex items-center gap-3 pt-3">
+          <span class="badge">SSR</span><span class="badge">Islands</span><span class="badge">Playwright</span><span class="badge">Vitest</span>
+        </div>
+      </div>
+      <div class="card animate-float">
+        <h3 class="font-semibold mb-3">Toolkit</h3>
+        <ul class="space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
+          <li>• Typed API client & shared UI</li>
+          <li>• Dark mode with a single toggle</li>
+          <li>• Reusable components: Modal, Toast, Skeleton</li>
+          <li>• Minimalist charts (SVG sparklines)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-10 grid md:grid-cols-3 gap-4">
+    <div class="card"><h3 class="font-semibold">Fast</h3><p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">Partial hydration, small bundles, edge-ready.</p></div>
+    <div class="card"><h3 class="font-semibold">Accessible</h3><p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">Keyboard-friendly and color-contrast aware.</p></div>
+    <div class="card"><h3 class="font-semibold">Polished</h3><p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">Subtle motion and consistent spacing scale.</p></div>
+  </section>
+</Layout>

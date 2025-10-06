@@ -1,0 +1,35 @@
+---
+import ThemeToggle from '../react/ThemeToggle.tsx';
+import UserMenu from '../react/UserMenu.tsx';
+const { nav = [] } = Astro.props;
+const current = Astro.url.pathname;
+---
+
+<header class="border-b bg-white/70 backdrop-blur sticky top-0 z-40 dark:bg-neutral-900/70">
+  <div class="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
+    <a href="/" class="font-semibold tracking-tight text-[17px] hover:opacity-80">CMS</a>
+
+    <div class="flex items-center gap-3">
+      <nav class="hidden sm:flex items-center gap-2">
+        {nav.map((n: any) => {
+          const active = current === n.href || (n.href !== '/' && current.startsWith(n.href));
+          return (
+            <a href={n.href}
+               class={`px-3 py-1.5 rounded-lg text-sm transition ${
+                 active
+                   ? 'bg-neutral-900 text-white dark:bg-white dark:text-neutral-900'
+                   : 'hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300'
+               }`}
+               aria-current={active ? 'page' : undefined}>
+              {n.label}
+            </a>
+          );
+        })}
+      </nav>
+
+      <!-- Auth-aware menu (shows Sign in when logged out) -->
+      <UserMenu client:load />
+      <ThemeToggle client:load />
+    </div>
+  </div>
+</header>

@@ -1,0 +1,11 @@
+---
+import Layout from '../../layouts/BaseLayout.astro';
+import Dashboard from '../../components/react/Dashboard.tsx';
+---
+<Layout title="Dashboard">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-semibold">Realtime Metrics</h1>
+    <a href="/" class="text-sm hover:opacity-80">← Back home</a>
+  </div>
+  <Dashboard client:load pollMs={5000} />
+</Layout>

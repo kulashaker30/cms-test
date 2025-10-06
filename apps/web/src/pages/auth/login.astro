@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/BaseLayout.astro';
+import AuthForm from '../../components/react/AuthForm.tsx';
+---
+
+<Layout title="Sign in">
+  <div class="mx-auto max-w-6xl grid md:grid-cols-2 gap-8">
+    <section class="card">
+      <h1 class="text-xl font-semibold mb-2">Welcome back</h1>
+      <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-4">Sign in to continue.</p>
+      <AuthForm client:load mode="login" />
+      <p class="text-sm mt-3 text-neutral-600 dark:text-neutral-300">
+        No account? <a href="/auth/register" class="underline">Create one</a>.
+      </p>
+    </section>
+
+    <aside class="card-muted">
+      <h2 class="font-semibold mb-2">Why sign in?</h2>
+      <ul class="text-sm text-neutral-700 dark:text-neutral-300 list-disc pl-5 space-y-1">
+        <li>Create & edit articles</li>
+        <li>Leave comments</li>
+        <li>Access your dashboard</li>
+      </ul>
+    </aside>
+  </div>
+</Layout>

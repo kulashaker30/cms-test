@@ -1,0 +1,15 @@
+
+> @cms/api@ dev C:\Users\User\WebstormProjects\cms\apps\api
+> next dev -p 3000
+
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3000
+  - Environments: .env
+
+ ✓ Starting...
+
+   We detected TypeScript in your project and reconfigured your tsconfig.json file for you. Strict-mode is set to false by default.
+   The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+
+   	- noEmit was set to true
+   	- incremental was set to true

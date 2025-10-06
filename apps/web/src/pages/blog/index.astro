@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/BaseLayout.astro';
+import CreateArticleCTA from '../../components/react/CreateArticleCTA.tsx';
+
+const API_URL = import.meta.env.PUBLIC_API_URL ?? 'http://localhost:3000/api';
+let articles = []; let error = null;
+try {
+  const res = await fetch(`${API_URL}/content`);
+  if (!res.ok) throw new Error(String(res.status));
+  articles = await res.json();
+} catch (e) { error = 'Could not load articles. Please ensure the API is running.'; }
+---
+<Layout title="Blog">
+  <div class="flex items-center justify-between mb-4">
+    <h1 class="text-2xl font-semibold">Latest Articles</h1>
+
+    <!-- Only visible when logged in -->
+    <CreateArticleCTA client:load />
+  </div>
+
+  {error ? (
+    <div class="card text-rose-700 border-rose-200 bg-rose-50 dark:bg-rose-950/30 dark:border-rose-900">{error}</div>
+  ) : articles.length === 0 ? (
+    <div class="card-muted">No articles yet. Create one from the dashboard.</div>
+  ) : (
+    <div class="grid md:grid-cols-2 gap-4">
+      {articles.map((a: any) => (
+        <a href={`/blog/${a.id}`} class="group rounded-2xl border shadow-card overflow-hidden hover:shadow-xl transition dark:border-neutral-800">
+          <div class="h-36 bg-gradient-to-br from-[rgba(63,108,243,0.35)] to-[rgba(16,185,129,0.35)]"></div>
+          <div class="p-4 bg-white dark:bg-neutral-900">
+            <h3 class="font-semibold group-hover:underline">{a.title}</h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-300 line-clamp-2 mt-1">{a.content ?? '—'}</p>
+            <div class="mt-3 text-xs text-neutral-500 dark:text-neutral-400">Read →</div>
+          </div>
+        </a>
+      ))}
+    </div>
+  )}
+</Layout>

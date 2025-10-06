@@ -1,0 +1,159 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  admin
+  editor
+  author
+  viewer
+}
+
+enum ContentKind {
+  ARTICLE
+  PAGE
+}
+
+model User {
+  id              String           @id @default(cuid())
+  email           String           @unique
+  password        String
+  role            Role             @default(viewer)
+  permissions     String[]
+  displayName     String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  articles        Article[]
+  comments        Comment[]
+  contentVersions ContentVersion[]
+  reactions       Reaction[]
+  refreshTokens   RefreshToken[]
+  mediaUploads    MediaAsset[]     @relation("MediaAssetUploadedBy")
+}
+
+model Article {
+  id          String           @id @default(cuid())
+  title       String
+  slug        String           @unique
+  content     String
+  excerpt     String?
+  authorId    String
+  author      User             @relation(fields: [authorId], references: [id])
+  publishedAt DateTime?
+  tags        String[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  versions    ContentVersion[]
+  comments    Comment[]
+  media       MediaAsset[]     @relation("ArticleMedia")
+
+  @@index([publishedAt])
+  @@index([authorId])
+}
+
+model Page {
+  id          String           @id @default(cuid())
+  title       String
+  slug        String           @unique
+  blocks      Json?
+  publishedAt DateTime?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  versions    ContentVersion[]
+  media       MediaAsset[]     @relation("PageMedia")
+
+  @@index([publishedAt])
+}
+
+model ContentVersion {
+  id          String      @id @default(cuid())
+  kind        ContentKind
+  articleId   String?
+  pageId      String?
+  version     Int
+  data        Json
+  createdById String
+  createdBy   User        @relation(fields: [createdById], references: [id])
+  createdAt   DateTime    @default(now())
+  publishedAt DateTime?
+
+  article Article? @relation(fields: [articleId], references: [id])
+  page    Page?    @relation(fields: [pageId], references: [id])
+
+  @@unique([kind, articleId, pageId, version])
+  @@index([createdById])
+  @@index([publishedAt])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  articleId String
+  authorId  String
+  parentId  String?
+  text      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isDeleted Boolean  @default(false)
+
+  article   Article    @relation(fields: [articleId], references: [id])
+  author    User       @relation(fields: [authorId], references: [id])
+  parent    Comment?   @relation("CommentToComment", fields: [parentId], references: [id])
+  replies   Comment[]  @relation("CommentToComment")
+  reactions Reaction[]
+
+  @@index([articleId])
+  @@index([parentId])
+  @@index([createdAt])
+}
+
+model Reaction {
+  id        String   @id @default(cuid())
+  commentId String
+  userId    String
+  type      String
+  createdAt DateTime @default(now())
+
+  comment Comment @relation(fields: [commentId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+
+  @@unique([commentId, userId, type])
+  @@index([userId])
+}
+
+model MediaAsset {
+  id           String    @id @default(cuid())
+  kind         String
+  url          String
+  alt          String?
+  mimeType     String?
+  width        Int?
+  height       Int?
+  sizeBytes    Int?
+  createdAt    DateTime  @default(now())
+  uploadedById String?
+  uploadedBy   User?     @relation("MediaAssetUploadedBy", fields: [uploadedById], references: [id])
+  articles     Article[] @relation("ArticleMedia")
+  pages        Page[]    @relation("PageMedia")
+
+  @@index([uploadedById])
+  @@index([kind])
+}
+
+model RefreshToken {
+  id        String    @id @default(cuid())
+  userId    String
+  token     String    @unique
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+  revokedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([expiresAt])
+}

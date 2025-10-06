@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/BaseLayout.astro';
+import NewArticleForm from '../../components/react/NewArticleForm.tsx';
+---
+
+<Layout title="New Article">
+  <!-- client-side guard -->
+  <script is:inline>
+    (function () {
+      try {
+        const t = localStorage.getItem('accessToken');
+        if (!t) {
+          const next = encodeURIComponent('/blog/article');
+          location.replace(`/auth/login?next=${next}`);
+        } else {
+          // quick expiry check
+          const [, p] = t.split('.');
+          const exp = JSON.parse(atob(p)).exp || 0;
+          if (exp * 1000 <= Date.now()) {
+            const next = encodeURIComponent('/blog/article');
+            location.replace(`/auth/login?next=${next}`);
+          }
+        }
+      } catch {
+        const next = encodeURIComponent('/blog/article');
+        location.replace(`/auth/login?next=${next}`);
+      }
+    })();
+  </script>
+
+  <div class="card">
+    <NewArticleForm client:load />
+  </div>
+</Layout>

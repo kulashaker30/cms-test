@@ -1,0 +1,19 @@
+---
+import Header from '../components/astro/Header.astro';
+import Footer from '../components/astro/Footer.astro';
+import '../styles/global.css';
+const { title = 'Article', description = '' } = Astro.props;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} • CMS</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class="bg-white text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100">
+    <Header nav={[{href:'/',label:'Home'},{href:'/blog',label:'Blog'},{href:'/dashboard',label:'Dashboard'}]} />
+    <main class="mx-auto max-w-3xl px-4 py-10"><slot /></main>
+    <Footer />
+  </body>
+</html>

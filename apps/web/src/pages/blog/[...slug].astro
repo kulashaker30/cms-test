@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/ArticleLayout.astro';
+import CommentSection from '../../components/react/CommentSection.tsx';
+
+const API_URL = import.meta.env.PUBLIC_API_URL ?? 'http://localhost:3000/api';
+const { slug } = Astro.params;
+const res = await fetch(`${API_URL}/content/${slug}`);
+let article = await res.json();
+if (!res.ok) { article = { id: 'notfound', title: 'Not found', content: '<p>Article not found.</p>' }; }
+---
+<Layout title={article.title}>
+  <article class="prose max-w-none">
+    <h1 class="mb-2">{article.title}</h1>
+    <div class="my-6" set:html={article.content ?? ''} />
+  </article>
+
+  <CommentSection client:load articleId={article.id} />
+</Layout>
