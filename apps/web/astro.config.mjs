@@ -9,12 +9,5 @@ export default defineConfig({
   adapter: vercel(),
   integrations: [react(), tailwind()],
   vite: {
-    resolve: {
-      alias: {
-        // point @ui to the *folder*; Vite will pick up its index.ts
-        '@ui': fileURLToPath(new URL('../../packages/ui/src', import.meta.url)),
-        '@shared': fileURLToPath(new URL('../../packages/shared/src', import.meta.url)),
-      },
-    },
   },
 });
