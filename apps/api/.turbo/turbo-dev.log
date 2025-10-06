@@ -1,0 +1,27 @@
+
+> @cms/api@ dev C:\Users\User\WebstormProjects\cms\apps\api
+> next dev -p 3000
+
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3000
+  - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 2.5s
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 2.3s (434 modules)
+ GET / 404 in 2569ms
+ ○ Compiling /docs ...
+ ✓ Compiled /docs in 7.7s (2585 modules)
+ GET /docs 200 in 7897ms
+ GET /openapi.json 404 in 53ms
+ GET /openapi.json 404 in 45ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ✓ Compiled in 767ms (2571 modules)
+ GET /docs 200 in 466ms
+ ✓ Compiled /middleware in 292ms (73 modules)
+ ✓ Compiled /api/openapi.json in 127ms (453 modules)
+ GET /api/openapi.json 200 in 201ms
+ GET /api/openapi.json 200 in 8ms
+ ✓ Compiled in 501ms (2576 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
