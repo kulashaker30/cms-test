@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MetricCard } from '@ui';
+import {MetricCard} from "./MetricCard";
 
 const API = import.meta.env.PUBLIC_API_URL ?? "http://localhost:3000/api";
 
