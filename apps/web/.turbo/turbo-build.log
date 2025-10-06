@@ -1,0 +1,43 @@
+
+> @cms/web@ build C:\Users\User\WebstormProjects\cms\apps\web
+> astro build
+
+19:56:22 [types] Generated 219ms
+19:56:22 [build] output: "server"
+19:56:22 [build] directory: C:\Users\User\WebstormProjects\cms\apps\web\.vercel\output\
+19:56:22 [build] adapter: @astrojs/vercel/serverless
+19:56:22 [build] Collecting build info...
+19:56:22 [build] ✓ Completed in 358ms.
+19:56:22 [build] Building server entrypoints...
+19:56:27 [vite] [32m✓ built in 4.35s[39m
+19:56:27 [build] ✓ Completed in 4.43s.
+
+ building client (vite) 
+19:56:27 [vite] transforming...
+19:56:28 [vite] [32m✓[39m 151 modules transformed.
+19:56:28 [vite] rendering chunks...
+19:56:29 [vite] computing gzip size...
+19:56:29 [vite] [2m.vercel/output/static/[22m[36m_astro/CreateArticleCTA.BA6mpQpk.js  [39m[1m[2m  0.51 kB[22m[1m[22m[2m │ gzip:   0.38 kB[22m
+19:56:29 [vite] [2m.vercel/output/static/[22m[36m_astro/ThemeToggle.DPV0rexm.js       [39m[1m[2m  0.72 kB[22m[1m[22m[2m │ gzip:   0.47 kB[22m
+19:56:29 [vite] [2m.vercel/output/static/[22m[36m_astro/jsx-runtime.CYiYLu1p.js       [39m[1m[2m  0.92 kB[22m[1m[22m[2m │ gzip:   0.58 kB[22m
+19:56:29 [vite] [2m.vercel/output/static/[22m[36m_astro/UserMenu.CPyMfrPf.js          [39m[1m[2m  1.25 kB[22m[1m[22m[2m │ gzip:   0.66 kB[22m
+19:56:29 [vite] [2m.vercel/output/static/[22m[36m_astro/client.BuXouAwW.js            [39m[1m[2m  1.75 kB[22m[1m[22m[2m │ gzip:   0.89 kB[22m
+19:56:29 [vite] [2m.vercel/output/static/[22m[36m_astro/AuthForm.BaxrUiid.js          [39m[1m[2m  2.26 kB[22m[1m[22m[2m │ gzip:   0.96 kB[22m
+19:56:29 [vite] [2m.vercel/output/static/[22m[36m_astro/NewArticleForm.DYyQz_8t.js    [39m[1m[2m  2.51 kB[22m[1m[22m[2m │ gzip:   1.18 kB[22m
+19:56:29 [vite] [2m.vercel/output/static/[22m[36m_astro/CommentSection.SFtkaeU0.js    [39m[1m[2m  3.26 kB[22m[1m[22m[2m │ gzip:   1.40 kB[22m
+19:56:29 [vite] [2m.vercel/output/static/[22m[36m_astro/Dashboard.CKr6TX2u.js         [39m[1m[2m  3.50 kB[22m[1m[22m[2m │ gzip:   1.33 kB[22m
+19:56:29 [vite] [2m.vercel/output/static/[22m[36m_astro/index.CZlPm10g.js             [39m[1m[2m  6.84 kB[22m[1m[22m[2m │ gzip:   2.74 kB[22m
+19:56:29 [vite] [2m.vercel/output/static/[22m[36m_astro/index.F2cJQlSt.js             [39m[1m[2m133.95 kB[22m[1m[22m[2m │ gzip:  43.14 kB[22m
+19:56:29 [vite] [2m.vercel/output/static/[22m[36m_astro/Editor.BWrhM6Rk.js            [39m[1m[2m392.40 kB[22m[1m[22m[2m │ gzip: 124.81 kB[22m
+19:56:29 [vite] [32m✓ built in 1.97s[39m
+19:56:29 [build] Rearranging server assets...
+19:56:29 [@astrojs/vercel/serverless] Bundling function ..\..\_functions\entry.mjs
+19:56:32 [build] Waiting for integration "@astrojs/vercel/serverless", hook "astro:build:done"...
+EPERM: operation not permitted, symlink '..\..\..\..\..\..' -> 'C:\Users\User\WebstormProjects\cms\apps\web\.vercel\output\functions\_render.func\apps\web\node_modules'
+  Stack trace:
+    at async Module.symlink (node:internal/fs/promises:997:10)
+    at async copyDependenciesToFunction (file:///C:/Users/User/WebstormProjects/cms/node_modules/.pnpm/@astrojs+vercel@7.8.2_astro@4.16.19_@types+node@20.19.19_rollup@4.52.4_typescript@5.9.3__next_ckt5cccqf2hhrduyfmm2kfglzi/node_modules/@astrojs/vercel/dist/lib/nft.js:50:28)
+    at async astro:build:done (file:///C:/Users/User/WebstormProjects/cms/node_modules/.pnpm/@astrojs+vercel@7.8.2_astro@4.16.19_@types+node@20.19.19_rollup@4.52.4_typescript@5.9.3__next_ckt5cccqf2hhrduyfmm2kfglzi/node_modules/@astrojs/vercel/dist/serverless/adapter.js:228:25)
+    at async runHookBuildDone (file:///C:/Users/User/WebstormProjects/cms/node_modules/.pnpm/astro@4.16.19_@types+node@20.19.19_rollup@4.52.4_typescript@5.9.3/node_modules/astro/dist/integrations/hooks.js:428:7)
+    at async AstroBuilder.run (file:///C:/Users/User/WebstormProjects/cms/node_modules/.pnpm/astro@4.16.19_@types+node@20.19.19_rollup@4.52.4_typescript@5.9.3/node_modules/astro/dist/core/build/index.js:182:7)
+ ELIFECYCLE  Command failed with exit code 1.
