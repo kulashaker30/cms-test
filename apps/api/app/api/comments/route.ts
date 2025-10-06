@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../../lib/prisma';
 import jwt from 'jsonwebtoken';
+export const runtime = 'nodejs';         // Prisma needs Node
+export const dynamic = 'force-dynamic';  // don't prerender at build
+export const revalidate = 0;             // no ISR for API route
 
-export const runtime = 'nodejs';
 const JWT_SECRET = process.env.JWT_SECRET || 'dev';
 
 function toTree(rows: any[]) {

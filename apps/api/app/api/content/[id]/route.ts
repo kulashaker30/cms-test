@@ -1,5 +1,9 @@
 import { NextRequest } from 'next/server';
 import { prisma } from '../../../../lib/prisma';
+export const runtime = 'nodejs';         // Prisma needs Node
+export const dynamic = 'force-dynamic';  // don't prerender at build
+export const revalidate = 0;             // no ISR for API route
+
 
 export async function GET(_: NextRequest, { params }: { params: { id: string }}) {
   const article = await prisma.article.findFirst({
