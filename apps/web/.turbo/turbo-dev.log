@@ -1,0 +1,19 @@
+
+> @cms/web@ dev C:\Users\User\WebstormProjects\cms\apps\web
+> astro dev  --host --port 4321
+
+18:05:34 [types] Generated 2ms
+
+ astro  v4.16.19 ready in 640 ms
+
+┃ Local    http://localhost:4321/
+┃ Network  http://172.18.32.1:4321/
+           http://192.168.1.31:4321/
+           http://192.168.192.1:4321/
+
+18:05:34 watching for file changes...
+18:05:38 [200] /auth/login 192ms
+18:05:39 [200] /auth/register 9ms
+18:06:01 [200] /auth/login 5ms
+18:06:05 [200] / 10ms
+18:06:11 [200] /dashboard 4ms
