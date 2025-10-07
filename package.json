@@ -2,7 +2,7 @@
   "name": "cms-platform",
   "private": true,
   "packageManager": "pnpm@9.0.0",
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": ["apps/*"],
   "engines": { "node": "20.x" },
   "scripts": {
     "dev": "turbo run dev --parallel",
