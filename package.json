@@ -2,8 +2,12 @@
   "name": "cms-platform",
   "private": true,
   "packageManager": "pnpm@9.0.0",
-  "workspaces": ["apps/*"],
-  "engines": { "node": "20.x" },
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
@@ -15,11 +19,10 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
-    "turbo": "^2.0.0",
-    "prettier": "^3.3.3",
     "@types/node": "^20.11.30",
-    "typescript": "^5.6.2",
     "playwright": "^1.47.2",
-    "astro": "^4.13.0"
+    "prettier": "^3.3.3",
+    "turbo": "^2.0.0",
+    "typescript": "^5.6.2"
   }
 }
