@@ -8,17 +8,21 @@
   "scripts": {
     "prisma:generate": "prisma generate --schema ./prisma/schema.prisma",
     "prisma:migrate": "prisma migrate deploy --schema ./prisma/schema.prisma",
+
     "dev": "next dev -p 3000",
-    "build": "next build",
-    "start": "next start -p 3000",
+
+    "build": "echo \"[api] prisma generate…\" && pnpm run prisma:generate && next build",
+    "start": "echo \"[api] prisma migrate deploy…\" && pnpm run prisma:migrate && next start -p 3000",
+
     "lint": "eslint .",
+
     "postinstall": "prisma generate",
+
     "test": "cross-env NODE_ENV=test jest -c jest.config.cjs",
     "test:watch": "cross-env NODE_ENV=test jest -c jest.config.cjs --watch"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
-    "typescript": "^5.4.0",
     "prisma": "^5.22.0",
     "bcryptjs": "^2.4.3",
     "ioredis": "^5.4.2",
@@ -34,7 +38,8 @@
     "@astrojs/react": "^3.6.0",
     "@astrojs/tailwind": "^5.1.0",
     "@astrojs/vercel": "^7.8.0",
-    "@astrojs/node": "^8.2.6"
+    "@astrojs/node": "^8.2.6",
+    "typescript": "^5.4.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -42,7 +47,6 @@
     "@types/node": "^20.11.30",
     "eslint": "^9.12.0",
     "eslint-config-next": "14.2.5",
-    "prisma": "^5.22.0",
     "tsx": "^4.20.6",
     "typescript": "^5.6.2",
     "vitest": "^2.1.1",
