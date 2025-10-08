@@ -1,41 +1,43 @@
 import { NextResponse, NextRequest } from 'next/server';
 
-const ALLOWED_ORIGINS = (process.env.CORS_ORIGINS ?? 'http://localhost:4321')
+const ORIGINS = (process.env.CORS_ORIGINS ?? 'http://localhost:4321')
     .split(',')
-    .map(s => s.trim());
+    .map(s => s.trim())
+    .filter(Boolean);
 
-function makeCorsHeaders(origin: string) {
-  return {
-    'Access-Control-Allow-Origin': origin,
-    'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    'Access-Control-Allow-Credentials': 'true',
-  };
+function corsHeaders(origin?: string) {
+  const h = new Headers({
+    'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
+    'Access-Control-Max-Age': '86400',
+    'Vary': 'Origin',
+  });
+  if (origin) h.set('Access-Control-Allow-Origin', origin);
+  // If you use cookies-based auth, uncomment the next line:
+  // h.set('Access-Control-Allow-Credentials', 'true');
+  return h;
 }
 
 export function middleware(req: NextRequest) {
   const origin = req.headers.get('origin') ?? '';
-  const allowed =
-      ALLOWED_ORIGINS.includes('*') ||
-      ALLOWED_ORIGINS.includes(origin);
+  const isAllowed = origin && ORIGINS.includes(origin);
 
   // Preflight
   if (req.method === 'OPTIONS') {
+    // Return headers even if not allowed; browser will still enforce
     return new NextResponse(null, {
       status: 204,
-      headers: allowed ? makeCorsHeaders(origin) : undefined,
+      headers: corsHeaders(isAllowed ? origin : undefined),
     });
   }
 
   // Normal requests
   const res = NextResponse.next();
-  if (allowed) {
-    const headers = makeCorsHeaders(origin);
-    Object.entries(headers).forEach(([k, v]) => res.headers.set(k, v));
-  }
+  const headers = corsHeaders(isAllowed ? origin : undefined);
+  headers.forEach((v, k) => res.headers.set(k, v));
   return res;
 }
 
 export const config = {
-  matcher: ['/api/:path*'], // apply CORS to all API routes
+  matcher: ['/api/:path*'],
 };
